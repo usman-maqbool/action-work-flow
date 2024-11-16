@@ -1,3 +1,4 @@
+name: "pull-server"
 on:
   push:
     branches:
@@ -13,6 +14,7 @@ jobs:
         # check this thread to understand why it’s needed:
         # https://stackoverflow.com/a/70447517
         run: |
+          mkdir -p ~/.ssh
           install -m 600 /dev/null ~/.ssh/id_rsa
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           ssh-keyscan -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts
